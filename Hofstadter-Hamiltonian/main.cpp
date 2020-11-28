@@ -24,10 +24,10 @@ void printArray2D(double **array,int dimx, int dimy){
 
 int main(){
 	//array decleration
-	int dimx=50,dimy=50;
+	int dimx=1000,dimy=1000;
 	double** result= new double*[dimx];
 	for(int i=0;i<dimy;i++){
 		result[i]=new double[dimy];
 	}
-	//printArray2D(result,dimx,dimy);
+	
 }
