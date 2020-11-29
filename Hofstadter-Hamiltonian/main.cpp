@@ -53,7 +53,7 @@ int main(){
 	//array decleration
 
 	//matrix[dimy][dimx]
-	int dimx=8000,dimy=1000;
+	int dimx=800,dimy=100;
 	double e=0.0,m=1.0,alpha=1,nu=0;
 
 	double **result= new double*[dimy];
@@ -96,9 +96,9 @@ int main(){
 
 	//main loop
 	int count=0;
-	for(e=-4; e<=4;e+=0.001)
+	for(e=-4; e<=4;e+=0.01)
 	{
-		result[999][count]=trace(a,2);
+		result[99][count]=trace(a,2);
 		count+=1;
 	}
 
