@@ -4,15 +4,15 @@
 using namespace std;
 
 //[x][y];
-
-
-double trace(double **array, int dimx){
-	double result=0.0;
-	for(inti=0;i<dim;i++){
+double trace(double **array,int dim){
+	double result=0;
+	for (int i = 0; i < dim; i++) {
 		result+= array[i][i];
 	}
 	return result;
 }
+
+
 void arrToFile(double **result, int dimx, int dimy){
 	ofstream file;
 	file.open("Output.dat");
@@ -57,7 +57,7 @@ int main(){
 	double e=0.0,m=1.0,alpha=1,nu=0;
 
 	double **result= new double*[dimy];
-	for(int i=0;i<dimx;i++){
+	for(int i=0;i<dimy;i++){
 		result[i]=new double[dimx];
 	}
 
@@ -83,7 +83,7 @@ int main(){
 	// Initializing a matrix
 	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
 	a[1][0] = 1.0; a[1][1] = 0.0;
-	
+
 	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
 	b[1][0]=1.0; b[1][1]=0.0;
 
@@ -97,12 +97,12 @@ int main(){
 	//main loop
 	int count=0;
 	for(e=-4; e<=4;e+=0.001)
-	{	
-		matrix[1000][count]=trace(a,2);
+	{
+		result[999][count]=trace(a,2);
 		count+=1;
 	}
 
-
+	arrToFile(result,dimx,dimy);
 
 	//Delete everything (Not always needed for newer systems)
 	deleteArray(result, dimy);
