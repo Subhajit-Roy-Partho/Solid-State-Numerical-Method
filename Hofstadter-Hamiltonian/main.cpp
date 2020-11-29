@@ -3,20 +3,29 @@
 #include <cmath>
 using namespace std;
 
+//[x][y];
 
+
+double trace(double **array, int dimx){
+	double result=0.0;
+	for(inti=0;i<dim;i++){
+		result+= array[i][i];
+	}
+	return result;
+}
 void arrToFile(double **result, int dimx, int dimy){
 	ofstream file;
 	file.open("Output.dat");
-	for(int j=0;j<dimy;j++){
-		for(int i=0; i<dimx;i++){
+	for(int i=0;i<dimy;i++){
+		for(int j=0; j<dimx;j++){
 			file << result[i][j]<<"\t";
 		}
 		file<<"\n";
 	}
 }
 void printArray2D(double **array,int dimx, int dimy){
-	for(int j=0;j<dimy;j++){
-		for(int i=0; i<dimx;i++){
+	for(int i=0;i<dimy;i++){
+		for(int j=0; j<dimx;j++){
 			cout << array[i][j]<<"\t";
 		}
 		cout << "\n";
@@ -39,16 +48,17 @@ void deleteArray(double **array, int dimy){
 	delete[] array;
 }
 
+
 int main(){
 	//array decleration
 
-	//matrix[dimx][dimy]
-	int dimx=1000,dimy=1000;
+	//matrix[dimy][dimx]
+	int dimx=8000,dimy=1000;
 	double e=0.0,m=1.0,alpha=1,nu=0;
 
-	double **result= new double*[dimx];
-	for(int i=0;i<dimy;i++){
-		result[i]=new double[dimy];
+	double **result= new double*[dimy];
+	for(int i=0;i<dimx;i++){
+		result[i]=new double[dimx];
 	}
 
 
@@ -72,8 +82,25 @@ int main(){
 
 	// Initializing a matrix
 	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
-	a[1][0] = 1													 ; a[1][1] = 0.0;
+	a[1][0] = 1.0; a[1][1] = 0.0;
+	
+	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
+	b[1][0]=1.0; b[1][1]=0.0;
 
+	//matrixMultiplication(a,b,mult,2,2,2);
+
+	//printArray2D(a,2,2);
+	//printArray2D(b,2,2);
+	//printArray2D(mult,2,2);
+
+
+	//main loop
+	int count=0;
+	for(e=-4; e<=4;e+=0.001)
+	{	
+		matrix[1000][count]=trace(a,2);
+		count+=1;
+	}
 
 
 
