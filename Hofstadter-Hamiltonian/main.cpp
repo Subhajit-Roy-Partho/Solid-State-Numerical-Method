@@ -62,7 +62,7 @@ void deleteArray(double **array, int dimy){
 multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
 	for(int i=0; i<N;i++){
 		matrixMultiplication(a,b,mult,2,2,2);
-
+		equateMatrix(a,b,2,2);
 	}
 }
 
