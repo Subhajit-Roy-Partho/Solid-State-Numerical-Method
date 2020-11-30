@@ -3,6 +3,9 @@
 #include <cmath>
 using namespace std;
 
+int qmax=100;
+
+
 //[x][y];
 double trace(double **array,int dim){
 	double result=0;
@@ -54,7 +57,7 @@ int main(){
 
 	//matrix[dimy][dimx]
 	int dimx=800,dimy=100;
-	double e=0.0,m=1.0,alpha=1,nu=0;
+	double e=0.0,m=1.0,alpha=1,nu=0, alpha_mat[dimy]//for alpha value store;
 
 	double **result= new double*[dimy];
 	for(int i=0;i<dimy;i++){
@@ -96,10 +99,19 @@ int main(){
 
 	//main loop
 	int count=0;
-	for(e=-4; e<=4;e+=0.01)
-	{
-		result[99][count]=trace(a,2);
-		count+=1;
+	// for(e=-4; e<=4;e+=0.01)
+	// {
+	// 	result[0][count]=trace(a,2);
+	// 	count+=1;
+	// }
+
+	for(int q=1;q<=qmax;q++){
+		for(int p=1; p<q; p++){
+			alpha = (double)(p/q);
+			for (double e = -4; e < 4; e+=0.01) {
+				
+			}
+		}
 	}
 
 	arrToFile(result,dimx,dimy);
