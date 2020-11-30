@@ -3,8 +3,8 @@
 #include <cmath>
 using namespace std;
 
-int qmax=100,m=0;
-double nu=0, alpha=1;
+int qmax=10,m=0;
+double nu=0, alpha=1,e=0;
 
 //[x][y];
 double trace(double **array,int dim){
@@ -59,7 +59,7 @@ void deleteArray(double **array, int dimy){
 	delete[] array;
 }
 
-multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
+void multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
 	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
 	a[1][0] = 1.0; a[1][1] = 0.0;
 	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
@@ -77,7 +77,7 @@ int main(){
 
 	//matrix[dimy][dimx]
 	int dimx=800,dimy=1000;
-	double e=0.0, alpha_mat[dimy]//for alpha value store;
+	double e=0.0, alpha_mat[dimy];//for alpha value store;
 
 	double **result= new double*[dimy];
 	for(int i=0;i<dimy;i++){
@@ -130,10 +130,10 @@ int countAlpha=0;
 			alpha = (double)(p/q);
 			alpha_mat[countAlpha]=alpha;
 			countAlpha+=1;
-			if(q>1)
-				multiplicationNtimes(a,b,mult,2,2,q);
 			int countE=0;
-			for (double e = -4; e < 4; e+=0.01) {
+			for (e = -4; e < 4; e+=0.01) {
+				if(q>1)
+					multiplicationNtimes(a,b,mult,2,2,q);
 				result[countAlpha][countE] = abs(trace(a,2));
 				countE+=1;
 			}
