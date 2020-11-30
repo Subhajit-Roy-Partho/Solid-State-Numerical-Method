@@ -44,6 +44,14 @@ void matrixMultiplication(double **a,double **b,double **mult, int r1, int c1, i
             }
 }
 
+void equateMatrix(double **a, double **b,int dimy, int dimx){
+	for(int i=0;i<dimy;i++){
+		for(int j=0;j<dimx;j++){
+			a[i][j]=b[i][j];
+		}
+	}
+}
+
 void deleteArray(double **array, int dimy){
 	for(int i=0; i<dimy;i++){
 		delete[] array[i];
@@ -51,6 +59,12 @@ void deleteArray(double **array, int dimy){
 	delete[] array;
 }
 
+multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
+	for(int i=0; i<N;i++){
+		matrixMultiplication(a,b,mult,2,2,2);
+
+	}
+}
 
 int main(){
 	//array decleration
@@ -106,10 +120,13 @@ int main(){
 	// }
 
 	for(int q=1;q<=qmax;q++){
+		if(q>1){
+
+		}
 		for(int p=1; p<q; p++){
 			alpha = (double)(p/q);
 			for (double e = -4; e < 4; e+=0.01) {
-				
+
 			}
 		}
 	}
