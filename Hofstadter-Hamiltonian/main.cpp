@@ -59,7 +59,7 @@ void deleteArray(double **array, int dimy){
 	delete[] array;
 }
 
-void multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
+void multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N, double e,double alpha){
 	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
 	a[1][0] = 1.0; a[1][1] = 0.0;
 	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
@@ -131,9 +131,9 @@ int countAlpha=0;
 			alpha_mat[countAlpha]=alpha;
 			countAlpha+=1;
 			int countE=0;
-			for (e = -4; e < 4; e+=0.01) {
+			for (double e = -4; e < 4; e+=0.01) {
 				if(q>1)
-					multiplicationNtimes(a,b,mult,2,2,q);
+					multiplicationNtimes(a,b,mult,2,2,q,e,alpha);
 				result[countAlpha][countE] = abs(trace(a,2));
 				countE+=1;
 			}
