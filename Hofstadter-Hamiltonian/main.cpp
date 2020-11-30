@@ -140,13 +140,13 @@ int countAlpha=0;
 		}
 	}
 
-	cout <<"Total Number of alpha components are"<< countAlpha<<"\n";
+	cout <<"Total Number of alpha components are "<< countAlpha<<"\n";
 	cout <<"Alpha values are \n";
 	for(int i =0;i <countAlpha;i++){
 		cout << alpha_mat[i]<< "\n";
 	}
 
-	arrToFile(result,dimx,dimy);
+	arrToFile(result,dimx,countAlpha);
 
 	//Delete everything (Not always needed for newer systems)
 	deleteArray(result, dimy);
