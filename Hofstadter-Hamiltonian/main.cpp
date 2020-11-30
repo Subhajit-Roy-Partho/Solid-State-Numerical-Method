@@ -3,8 +3,8 @@
 #include <cmath>
 using namespace std;
 
-int qmax=100;
-
+int qmax=100,m=0;
+double nu=0, alpha=1;
 
 //[x][y];
 double trace(double **array,int dim){
@@ -60,9 +60,15 @@ void deleteArray(double **array, int dimy){
 }
 
 multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N){
+	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
+	a[1][0] = 1.0; a[1][1] = 0.0;
+	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
+	b[1][0]=1.0; b[1][1]=0.0;
 	for(int i=0; i<N;i++){
 		matrixMultiplication(a,b,mult,2,2,2);
-		equateMatrix(a,b,2,2);
+		m+=1;
+		b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu);
+		equateMatrix(a,mult,2,2);
 	}
 }
 
@@ -70,8 +76,8 @@ int main(){
 	//array decleration
 
 	//matrix[dimy][dimx]
-	int dimx=800,dimy=100;
-	double e=0.0,m=1.0,alpha=1,nu=0, alpha_mat[dimy]//for alpha value store;
+	int dimx=800,dimy=1000;
+	double e=0.0, alpha_mat[dimy]//for alpha value store;
 
 	double **result= new double*[dimy];
 	for(int i=0;i<dimy;i++){
@@ -105,28 +111,31 @@ int main(){
 	b[1][0]=1.0; b[1][1]=0.0;
 
 	//matrixMultiplication(a,b,mult,2,2,2);
-
 	//printArray2D(a,2,2);
 	//printArray2D(b,2,2);
 	//printArray2D(mult,2,2);
 
 
 	//main loop
-	int count=0;
 	// for(e=-4; e<=4;e+=0.01)
 	// {
 	// 	result[0][count]=trace(a,2);
 	// 	count+=1;
 	// }
 
-	for(int q=1;q<=qmax;q++){
-		if(q>1){
+int countAlpha=0;
 
-		}
+	for(int q=1;q<=qmax;q++){
 		for(int p=1; p<q; p++){
 			alpha = (double)(p/q);
+			alpha_mat[countAlpha]=alpha;
+			countAlpha+=1;
+			if(q>1)
+				multiplicationNtimes(a,b,mult,2,2,q);
+			int countE=0;
 			for (double e = -4; e < 4; e+=0.01) {
-
+				result[countAlpha][countE] = abs(trace(a,2));
+				countE+=1;
 			}
 		}
 	}
