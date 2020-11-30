@@ -77,7 +77,7 @@ int main(){
 
 	//matrix[dimy][dimx]
 	int dimx=800,dimy=1000;
-	double e=0.0, alpha_mat[dimy];//for alpha value store;
+	double e=0.0, alpha_mat[dimy]={};//for alpha value store;
 
 	double **result= new double*[dimy];
 	for(int i=0;i<dimy;i++){
@@ -127,7 +127,7 @@ int countAlpha=0;
 
 	for(int q=1;q<=qmax;q++){
 		for(int p=1; p<q; p++){
-			alpha = (double)(p/q);
+			alpha = (double)p/(double)q;
 			alpha_mat[countAlpha]=alpha;
 			countAlpha+=1;
 			int countE=0;
@@ -140,6 +140,12 @@ int countAlpha=0;
 		}
 	}
 
+	cout <<"Total Number of alpha components are"<< countAlpha<<"\n";
+	cout <<"Alpha values are \n";
+	for(int i =0;i <countAlpha;i++){
+		cout << alpha_mat[i]<< "\n";
+	}
+
 	arrToFile(result,dimx,dimy);
 
 	//Delete everything (Not always needed for newer systems)
@@ -147,4 +153,5 @@ int countAlpha=0;
 	deleteArray(a,2);
 	deleteArray(b,2);
 	deleteArray(mult,2);
+	cout << "\n";
 }
