@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-int qmax=10,m=0;
+int qmax=3;
 double nu=0, alpha=1,e=0;
 
 //[x][y];
@@ -59,18 +59,19 @@ void deleteArray(double **array, int dimy){
 	delete[] array;
 }
 
-void multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N, double e,double alpha){
-	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
-	a[1][0] = 1.0; a[1][1] = 0.0;
-	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
-	b[1][0]=1.0; b[1][1]=0.0;
-	for(int i=0; i<N;i++){
-		matrixMultiplication(a,b,mult,2,2,2);
-		m+=1;
-		b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu);
-		equateMatrix(a,mult,2,2);
-	}
-}
+// void multiplicationNtimes(double **a, double **b, double **mult, int dimx, int dimy, int N, double e,double alpha){
+// 	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
+// 	a[1][0] = 1.0; a[1][1] = 0.0;
+// 	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
+// 	b[1][0]=1.0; b[1][1]=0.0;
+// 	for(int i=0; i<N;i++){
+// 		matrixMultiplication(a,b,mult,2,2,2);
+// 		m+=1;
+// 		b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu);
+// 		equateMatrix(a,mult,2,2);
+// 	}
+// }
+
 
 int main(){
 	//array decleration
@@ -104,11 +105,11 @@ int main(){
 	}
 
 	// Initializing a matrix
-	a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
-	a[1][0] = 1.0; a[1][1] = 0.0;
-
-	b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
-	b[1][0]=1.0; b[1][1]=0.0;
+	// a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
+	// a[1][0] = 1.0; a[1][1] = 0.0;
+	//
+	// b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
+	// b[1][0]=1.0; b[1][1]=0.0;
 
 	//matrixMultiplication(a,b,mult,2,2,2);
 	//printArray2D(a,2,2);
@@ -140,7 +141,13 @@ int main(){
 	// 	}
 	// }
 
+
+
+
+
+
 int countAlpha =0;
+cout << "Alpha Values are:\n";
 
 for(int q=1;q<=qmax;q++){
 	for(int p=1;p<q+1;p++){
@@ -157,17 +164,38 @@ for(int q=1;q<=qmax;q++){
 			// cout<<"Broken\n"; // Just don't do anything;
 		}else{
 			cout<< alpha<<"\n";
-			alpha_mat[countAlpha]=alpha;
 			countAlpha+=1;
+			alpha_mat[countAlpha-1]=alpha;
+			int countE=0;
+			for(double e =-4; e<=4;e+=0.01){
+				int m=1;
+				a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
+				a[1][0] = 1.0; a[1][1] = 0.0;
+
+				b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
+				b[1][0]=1.0; b[1][1]=0.0;
+
+
+				for(int j=1; j<q;j++){ //will work if q >1; Multiplying matrix q times.
+					matrixMultiplication(a,b,mult,2,2,2);
+					equateMatrix(a,mult,2,2);
+					m+=1;
+					b[0][0]=e -2*cos(2*M_PI*(m+1)*alpha - nu);
+				}
+				cout << "Q = "<<q<<" e = "<<e<< " alpha = "<< alpha<<"\n";
+				printArray2D(a,2,2);
+				result[countAlpha-1][countE]= abs(trace(a,2));
+				countE+=1;
+			}
 		}
 	}
 }
 
+
+
+
+
 	cout <<"Total Number of alpha components are "<< countAlpha<<"\n";
-	// cout <<"Alpha values are \n";
-	// for(int i =0;i <countAlpha;i++){
-	// 	cout << alpha_mat[i]<< "\n";
-	// }
 
 	arrToFile(result,dimx,countAlpha);
 

@@ -22,5 +22,8 @@ int main(){
 			a[j][i] = j*5+i;
 		}
 	}
-	print(a);
+	// print(a);
+	for(int i=0;i<0;i++){
+		cout<<i<<"\n";
+	}
 }
