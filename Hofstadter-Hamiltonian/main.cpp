@@ -3,18 +3,30 @@
 #include <cmath>
 using namespace std;
 
-int qmax=3;
-double nu=0, alpha=1,e=0;
+int qmax=50;
+double nu=0, alpha=0;
 
-//[x][y];
+//[y][x];
 double trace(double **array,int dim){
-	double result=0;
+	double res=0;
 	for (int i = 0; i < dim; i++) {
-		result+= array[i][i];
+		res+= array[i][i];
 	}
-	return result;
+	return res;
 }
 
+void gnuplotFile(double **result,double *alpha_mat,int dimx, int countAlpha){
+	ofstream file;
+	file.open("gnuOut.txt");
+	for(int j=0; j<countAlpha;j++){
+		for(int i=0; i<dimx;i++){
+			if(result[j][i]<=4){
+				file<< (-4.0) + (i*0.01)<< "\t" << alpha_mat[j]<<"\n";
+			}
+		}
+	}
+	file.close();
+}
 
 void arrToFile(double **result, int dimx, int dimy){
 	ofstream file;
@@ -25,6 +37,7 @@ void arrToFile(double **result, int dimx, int dimy){
 		}
 		file<<"\n";
 	}
+	file.close();
 }
 void printArray2D(double **array,int dimx, int dimy){
 	for(int i=0;i<dimy;i++){
@@ -163,11 +176,11 @@ for(int q=1;q<=qmax;q++){
 		if(br){
 			// cout<<"Broken\n"; // Just don't do anything;
 		}else{
-			cout<< alpha<<"\n";
+			// cout<< alpha<<"\n";
 			countAlpha+=1;
 			alpha_mat[countAlpha-1]=alpha;
 			int countE=0;
-			for(double e =-4; e<=4;e+=0.01){
+			for(double e =-4.0; e<=4.0;e+=0.01){
 				int m=1;
 				a[0][0] = e -2*cos(2*M_PI*m*alpha-nu); a[0][1] =-1.0;
 				a[1][0] = 1.0; a[1][1] = 0.0;
@@ -175,6 +188,8 @@ for(int q=1;q<=qmax;q++){
 				b[0][0] = e -2*cos(2*M_PI*(m+1)*alpha - nu); b[0][1] =-1.0;
 				b[1][0]=1.0; b[1][1]=0.0;
 
+				mult[0][0]=0.0; mult[0][1]=0.0;
+				mult[1][0]=0.0; mult[1][1]=0.0;
 
 				for(int j=1; j<q;j++){ //will work if q >1; Multiplying matrix q times.
 					matrixMultiplication(a,b,mult,2,2,2);
@@ -182,8 +197,8 @@ for(int q=1;q<=qmax;q++){
 					m+=1;
 					b[0][0]=e -2*cos(2*M_PI*(m+1)*alpha - nu);
 				}
-				cout << "Q = "<<q<<" e = "<<e<< " alpha = "<< alpha<<"\n";
-				printArray2D(a,2,2);
+				// cout << "Q = "<<q<<" e = "<<e<< " alpha = "<< alpha<<" trace = "<< trace(a,2)<<"\n";
+				// printArray2D(a,2,2);
 				result[countAlpha-1][countE]= abs(trace(a,2));
 				countE+=1;
 			}
@@ -198,7 +213,7 @@ for(int q=1;q<=qmax;q++){
 	cout <<"Total Number of alpha components are "<< countAlpha<<"\n";
 
 	arrToFile(result,dimx,countAlpha);
-
+	gnuplotFile(result,alpha_mat,dimx,countAlpha);
 	//Delete everything (Not always needed for newer systems)
 	deleteArray(result, dimy);
 	deleteArray(a,2);
