@@ -123,28 +123,51 @@ int main(){
 	// 	count+=1;
 	// }
 
-int countAlpha=0;
+// int countAlpha=0;
 
-	for(int q=1;q<=qmax;q++){
-		for(int p=1; p<q; p++){
-			alpha = (double)p/(double)q;
-			alpha_mat[countAlpha]=alpha;
-			countAlpha+=1;
-			int countE=0;
-			for (double e = -4; e < 4; e+=0.01) {
-				if(q>1)
-					multiplicationNtimes(a,b,mult,2,2,q,e,alpha);
-				result[countAlpha][countE] = abs(trace(a,2));
-				countE+=1;
+	// for(int q=1;q<=qmax;q++){
+	// 	for(int p=1; p<q; p++){
+	// 		alpha = (double)p/(double)q;
+	// 		alpha_mat[countAlpha]=alpha;
+	// 		countAlpha+=1;
+	// 		int countE=0;
+	// 		for (double e = -4; e < 4; e+=0.01) {
+	// 			if(q>1)
+	// 				multiplicationNtimes(a,b,mult,2,2,q,e,alpha);
+	// 			result[countAlpha][countE] = abs(trace(a,2));
+	// 			countE+=1;
+	// 		}
+	// 	}
+	// }
+
+int countAlpha =0;
+
+for(int q=1;q<=qmax;q++){
+	for(int p=1;p<q+1;p++){
+		bool br=false;
+		alpha = (double)p/(double)q;
+		for(int i=0;i<countAlpha-1;i++){
+			if(alpha == alpha_mat[i]){
+				// cout << "skipped"<<"\n";
+				br=true;
+				break;
 			}
 		}
+		if(br){
+			// cout<<"Broken\n"; // Just don't do anything;
+		}else{
+			cout<< alpha<<"\n";
+			alpha_mat[countAlpha]=alpha;
+			countAlpha+=1;
+		}
 	}
+}
 
 	cout <<"Total Number of alpha components are "<< countAlpha<<"\n";
-	cout <<"Alpha values are \n";
-	for(int i =0;i <countAlpha;i++){
-		cout << alpha_mat[i]<< "\n";
-	}
+	// cout <<"Alpha values are \n";
+	// for(int i =0;i <countAlpha;i++){
+	// 	cout << alpha_mat[i]<< "\n";
+	// }
 
 	arrToFile(result,dimx,countAlpha);
 
