@@ -63,6 +63,15 @@ void deleteArray(double **array, int dimy){
 }
 
 
+void gnuplot(){
+  ofstream file2;
+  file2.open("gnuscript.gnuplot");
+  file2 << "set xlabel 'e'\n set ylabel 'alpha'\n plot 'gnuOut.txt' w p pt 7 ps 0.2";
+  file2.close();
+  system("gnuplot -p gnuscript.gnuplot");
+  system("rm -rf gnuscript.gnuplot");
+}
+
 int main(){
   // Taking input for maximum value of q
   cout << "Please enter Maximum value of q"<<"\n";
@@ -165,10 +174,13 @@ int main(){
 
 
 	cout <<"Total Number of alpha components are "<< countAlpha<<"\n";
+	file.close();//Closing file gnuOut.txt
 
-	file.close();
+  //Deling all array
 	deleteArray(a,2);
 	deleteArray(b,2);
 	deleteArray(mult,2);
 	cout << "\n";
+  gnuplot(); // Plotting via gnuscript.
+
 }
