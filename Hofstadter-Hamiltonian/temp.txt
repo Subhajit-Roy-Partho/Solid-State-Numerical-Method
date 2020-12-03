@@ -1,3 +1,0 @@
-Alpha Values are:
-Total Number of alpha components are 774
-
