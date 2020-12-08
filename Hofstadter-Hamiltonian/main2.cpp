@@ -87,7 +87,7 @@ int main(){
   //array decleration
 
 	//matrix[dimy][dimx]
-	int dimx=800,dimy=(int)(qmax*qmax)/2;
+	int dimx=800,dimy=(int)(qmax*(qmax+1))/2;
 	double e=0.0;//for alpha value store;
 
   //matrix a[2][2]
