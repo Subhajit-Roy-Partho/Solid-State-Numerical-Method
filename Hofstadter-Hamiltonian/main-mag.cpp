@@ -74,7 +74,7 @@ void gnuplot(){
 }
 
 int main(){ //main loop
-	double randomness =1.000;
+	double randomness =100.000;
 	srand(time(0)); //Seed for the random number which is the current system time.
   // Taking input for maximum value of q
   cout << "Please enter Maximum value of q"<<"\n";
@@ -90,7 +90,7 @@ int main(){ //main loop
   //array decleration
 
 	//matrix[dimy][dimx]
-	int dimx=800,dimy=(int)(qmax*(qmax+1))/2;
+	int dimx=800,dimy=(int)(qmax*(qmax))/2;
 	double e=0.0;//for alpha value store;
 
   //matrix a[2][2]
@@ -124,8 +124,7 @@ int main(){ //main loop
   	for(int p=0;p<q+1;p++){ // p starting from 0 to qmax-1
   		bool br=false;
   		alpha = (double)p/(double)q + (double)(rand()%10)/randomness; //alpha value
-			// cout << (double)(rand()%10)/randomness<<"\t";
-
+			cout << alpha<<"\t";
       //preventing repetation
   		for(int i=0;i<countAlpha-1;i++){
   			if(alpha == alpha_mat[i]){
