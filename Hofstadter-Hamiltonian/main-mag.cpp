@@ -123,8 +123,12 @@ int main(){ //main loop
   for(int q=1;q<=qmax;q++){ // q values going from 1 to qmax
   	for(int p=0;p<q+1;p++){ // p starting from 0 to qmax-1
   		bool br=false;
-  		alpha = (double)p/(double)q + (double)(rand()%10)/randomness; //alpha value
-
+			randomness=0;
+  		alpha = (double)p/(double)q; //alpha value
+			for(int i=0; i<10;i++){
+				randomness+=((double)(rand()%10000)-5000.0)/1000000.0;
+			}
+			alpha+=randomness;
       //preventing repetation
   		for(int i=0;i<countAlpha-1;i++){
   			if(alpha == alpha_mat[i]){
