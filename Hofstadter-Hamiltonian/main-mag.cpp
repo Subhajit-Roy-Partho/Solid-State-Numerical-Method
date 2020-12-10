@@ -124,7 +124,7 @@ int main(){ //main loop
   	for(int p=0;p<q+1;p++){ // p starting from 0 to qmax-1
   		bool br=false;
   		alpha = (double)p/(double)q + (double)(rand()%10)/randomness; //alpha value
-			cout << alpha<<"\t";
+
       //preventing repetation
   		for(int i=0;i<countAlpha-1;i++){
   			if(alpha == alpha_mat[i]){
@@ -185,6 +185,6 @@ int main(){ //main loop
 	deleteArray(b,2);
 	deleteArray(mult,2);
 	cout << "\n";
-  gnuplot(); // Plotting via gnuscript.
+  // gnuplot(); // Plotting via gnuscript.
 
 }
