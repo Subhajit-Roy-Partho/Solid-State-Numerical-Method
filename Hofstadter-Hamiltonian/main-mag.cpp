@@ -121,17 +121,17 @@ int main(){ //main loop
   //Main loop for the calculation of the Hofstadter Butterfly
 
   for(int q2=1;q2<=qmax;q2++){ // q values going from 1 to qmax
-		// random= rand()%200 -100;
+		// random= (double)(rand()%20000 -10000)/100.0;
 		int q = q2;
 		// cout << q2<<"\n";
   	for(int p2=0;p2<q2+1;p2++){ // p starting from 0 to qmax-1
 			cout << "q2 = " << q2 << "\tp2= "<<p2<<"\n";
 			int p =p2;
   		bool br=false;
-			random = rand()%200 - 100;
-			q *= random;
-			p = p*random+q;
-  		alpha = (double)p/(double)q; //alpha value
+			random = (double)(rand()%20000 -10000)/100.0;
+			// q *= random;
+			// p = p*random+q;
+  		alpha = (double)p/(double)q + (double)1.0/random; //alpha value
       //preventing repetation
   		for(int i=0;i<countAlpha-1;i++){
   			if(alpha == alpha_mat[i]){
@@ -146,7 +146,7 @@ int main(){ //main loop
   			countAlpha+=1;// count for alpha values
   			alpha_mat[countAlpha-1]=alpha;// storing alpha values
   			int countE=0;// Count for Energy index
-  			nu = M_PI/(2*(double)q);// Setting value of nu.
+  			nu = M_PI/(2*(double)(random*q*p)/(double)(100.0*p+q));// Setting value of nu.
   			for(double e =-4.0; e<=4.0;e+=0.01){
   				int m=1;// Initializing m to 1
 
@@ -162,7 +162,7 @@ int main(){ //main loop
 
 
 
-  				for(int j=1; j<q;j++){ //will work if q >1; Multiplying matrix q times.
+  				for(int j=1; j<q2;j++){ //will work if q >1; Multiplying matrix q times.
             //Initializing values of mult = 0;
 
   					mult[0][0]=0.0; mult[0][1]=0.0;
