@@ -146,7 +146,7 @@ int main(){ //main loop
   			countAlpha+=1;// count for alpha values
   			alpha_mat[countAlpha-1]=alpha;// storing alpha values
   			int countE=0;// Count for Energy index
-  			nu = M_PI/(2*(double)(random*q*p)/(double)(100.0*p+q));// Setting value of nu.
+  			nu = M_PI/(2*(double)(random*q*p)/(double)(random*p+q));// Setting value of nu.
   			for(double e =-4.0; e<=4.0;e+=0.01){
   				int m=1;// Initializing m to 1
 
