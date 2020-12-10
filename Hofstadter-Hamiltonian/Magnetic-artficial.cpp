@@ -129,6 +129,11 @@ int main(){ //main loop
 			int p =p2;
   		bool br=false;
 			random = (double)(rand()%20000 -10000)/100.0;
+			if(random <100 && random >10){
+				random*=10;
+			}else{
+				random*=100;
+			}
 			// q *= random;
 			// p = p*random+q;
   		alpha = (double)p/(double)q + (double)1.0/random; //alpha value
