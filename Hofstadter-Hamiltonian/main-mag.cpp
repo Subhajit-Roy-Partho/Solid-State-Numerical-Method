@@ -117,18 +117,21 @@ int main(){ //main loop
 
   int countAlpha =0; //Stores total number of alpha
   cout << "\n";
-
+	int random = 0;
   //Main loop for the calculation of the Hofstadter Butterfly
 
-  for(int q=1;q<=qmax;q++){ // q values going from 1 to qmax
-  	for(int p=0;p<q+1;p++){ // p starting from 0 to qmax-1
+  for(int q2=1;q2<=qmax;q2++){ // q values going from 1 to qmax
+		// random= rand()%200 -100;
+		int q = q2;
+		// cout << q2<<"\n";
+  	for(int p2=0;p2<q2+1;p2++){ // p starting from 0 to qmax-1
+			cout << "q2 = " << q2 << "\tp2= "<<p2<<"\n";
+			int p =p2;
   		bool br=false;
-			randomness=0;
+			random = rand()%200 - 100;
+			q *= random;
+			p = p*random+q;
   		alpha = (double)p/(double)q; //alpha value
-			for(int i=0; i<10;i++){
-				randomness+=((double)(rand()%10000)-5000.0)/1000000.0;
-			}
-			alpha+=randomness;
       //preventing repetation
   		for(int i=0;i<countAlpha-1;i++){
   			if(alpha == alpha_mat[i]){
