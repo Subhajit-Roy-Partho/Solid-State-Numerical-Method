@@ -79,9 +79,10 @@ program Hofstadter
     !**** Plotting it using gnuplot *****
     call system('rm gnuCommands.txt')
     open(2, file="gnuCommands.txt",status="new")
+    write(2,*) "set terminal qt enhanced"
     write(2,*) "set key off"
-    write(2,*) "set xlabel '{/Symbol(e)}'"
-    write(2,*) "set ylabel '{/Symbol(a)}'"
+    write(2,*) "set xlabel '{/Symbol e}'"
+    write(2,*) "set ylabel '{/Symbol a}'"
     write(2,*) "plot 'gnuOut.txt' w p pt 7 ps 0.05"
     call system("gnuplot gnuCommands.txt --persist")
 
