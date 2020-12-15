@@ -1,5 +1,5 @@
 program Hofstarder
-	implicit none
+implicit none
 
 	real :: nu=0,alpha=0,e=0.0,res=0.0,p2,q2
 	integer :: qmax=50, dimx=800,countAlpha=1,p,q,i,countE=0,m=1,j
@@ -94,7 +94,7 @@ end program Hofstarder
 ! END FUNCTION trace
 
 
-SUBROUTINE trace(a,res)
+SUBROUTINE trace(a,res) !To find the trace of a 2x2 matrix
 
 implicit none
 
@@ -108,7 +108,7 @@ end do
 
 end SUBROUTINE trace
 
-SUBROUTINE matrixMultiplication(a,b,mult)
+SUBROUTINE matrixMultiplication(a,b,mult) ! Matrix a*b = mult
 
 implicit none
 
@@ -118,7 +118,7 @@ integer :: i,j,k
 do i=1,2
 	do j=1,2
 		do k=1,2
-			mult(i,j) = a(i,k)*b(k,j)
+			mult(i,j) = mult(i,j) + a(i,k)*b(k,j)
 		end do
 	end do
 end do
@@ -126,7 +126,7 @@ end do
 END SUBROUTINE matrixMultiplication
 
 
-SUBROUTINE equateMatrix(a,mult)
+SUBROUTINE equateMatrix(a,mult) ! Makes Matrix a = mult
 implicit none
 
 real, dimension(2,2) :: a,mult
