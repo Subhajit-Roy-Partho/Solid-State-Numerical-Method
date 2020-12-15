@@ -22,7 +22,7 @@ program Hofstadter
     do q = 1,qmax !denominator q values
     	do p = 0,q !numerator p values
     		br =.TRUE. !for checking the overlapping condition
-    		p2 = p*1.0000 !using p and q were giving some errors so taking a real version of them
+    		p2 = p*1.0000 !converting p and q to real variables
     		q2 = q*1.0000
     		alpha = p2/q2 !alpha value calculated here
     		do i = 1, countAlpha!to prevent repetation
@@ -85,7 +85,7 @@ program Hofstadter
     write(2,*) "plot 'gnuOut.txt' w p pt 7 ps 0.05"
     call system("gnuplot gnuCommands.txt --persist")
 
-    close(2)!closing opened files
+    close(2)!closing open files
     close(1)
 end program Hofstadter
 
